@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat Ulang Tahun</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7e6d1;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .envelope-container {
+            position: relative;
+            width: 200px;
+            height: 150px;
+            cursor: pointer;
+        }
+
+        .envelope {
+            width: 100%;
+            height: 100%;
+            background-color: #d35400;
+            position: absolute;
+            bottom: 0;
+            border-radius: 10px;
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .flap {
+            width: 0;
+            height: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 75px solid #e67e22;
+            transform-origin: top;
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .heart {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background-color: red;
+            clip-path: path("M24 4C21-4 8-4 4 7-2 14 24 34 24 34s26-20 20-27C40-4 27-4 24 4z");
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .heart:active {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .letter {
+            position: absolute;
+            width: 180px;
+            height: 220px;
+            background: white;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.6s ease-in-out;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+
+        .letter p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .close-button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border: none;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .close-button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+<audio id="music" loop>
+    <source src="blue.mp3" type="audio/mpeg">
+</audio>
+
+<div class="envelope-container" id="envelope-container">
+    <div class="envelope" id="envelope"></div>
+    <div class="flap" id="flap"></div>
+    <div class="heart" id="heart"></div>
+</div>
+
+<div class="letter" id="letter">
+    <h3>🎉🎂 Happy Birthday, Salsablia Tira Putri! 🎂🎉</h3>
+    <p>Selamat ulang tahun, Salsablia Tira Putri! 🎉🎂</p>
+    <p>Di hari spesialmu ini, aku ingin mengucapkan selamat bertambah usia! Semoga kamu selalu diberikan kesehatan, kebahagiaan, dan banyak rezeki. Jangan lupa, hari ini adalah hari di mana kamu bisa meminta apa pun (asal jangan minta bintang di langit, ya! 😹).</p>
+    <p>Kamu adalah orang yang sangat istimewa. Kamu selalu membuat hari-hariku lebih cerah dengan senyumanmu. Aku bersyukur bisa mengenalmu dan menjadi bagian dari hidupmu. Terima kasih karena selalu ada untukku, terima kasih karena menerima aku apa adanya, dan terima kasih karena membuatku merasa dicintai setiap hari.</p>
+    <p>Di hari ulang tahunmu ini, aku berharap kamu bisa terus menjadi pribadi yang kuat, mandiri, dan penuh kasih. Semoga semua impian dan harapanmu tercapai, dan semoga setiap langkahmu dihiasi dengan kebahagiaan dan kesuksesan. Oh, dan jangan lupa, hari ini adalah hari di mana kamu bisa makan kue sebanyak yang kamu mau tanpa merasa bersalah! 🍰😋</p>
+    <p>Selamat Ulang Tahun, Salsablia Tira Putri! 🎉🎂</p>
+    <p>Semoga hari ini menjadi hari yang penuh keceriaan, kebahagiaan, dan kejutan menyenangkan. Aku mencintaimu hari ini, besok, dan selamanya.</p>
+    <p>Dengan cinta yang tulus.</p>
+    <p>—SESEORANG—</p>
+    <button class="close-button" id="close-button">Tutup Amplop</button>
+</div>
+
+<script>
+    const envelope = document.getElementById("envelope");
+    const flap = document.getElementById("flap");
+    const heart = document.getElementById("heart");
+    const letter = document.getElementById("letter");
+    const closeButton = document.getElementById("close-button");
+    const envelopeContainer = document.getElementById("envelope-container");
+    const music = document.getElementById("music");
+
+    heart.addEventListener("click", () => {
+        envelope.style.transform = "translateY(200px)";
+        flap.style.transform = "rotateX(180deg)";
+        letter.classList.add("show");
+        heart.style.display = "none";
+        setTimeout(() => envelopeContainer.classList.add("hide"), 600);
+        music.play();
+    });
+
+    closeButton.addEventListener("click", () => {
+        envelopeContainer.classList.remove("hide");
+        envelope.style.transform = "translateY(0)";
+        flap.style.transform = "rotateX(0)";
+        letter.classList.remove("show");
+        heart.style.display = "block";
+        music.pause();
+        music.currentTime = 0;
+    });
+</script>
+
+</body>
+</html>
